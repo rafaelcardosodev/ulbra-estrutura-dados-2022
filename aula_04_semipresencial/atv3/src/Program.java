@@ -1,18 +1,16 @@
-import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
-        int matrix[][] = new int[3][3];
+        Car matrix[][] = new Car[2][2];
         buildMatrix(matrix);
-        String option = "";
+        String option = "a";
 
         while (option.toLowerCase() != "s") {
             Scanner sc = new Scanner(System.in);
             System.out.print("Digite a opção que deseja realizar \n" +
-                    "A - Adicionar elemento\n" +
-                    "R - Remover elemento\n" +
+                    "A - Adicionar um carro\n" +
+                    "R - Remover um carro\n" +
                     "L - Limpar matriz\n" +
                     "M - Mostrar matriz\n" +
                     "opção: ");
@@ -34,7 +32,7 @@ public class Program {
         }
     }
 
-    public static boolean addElement(int[][] matrix) {
+    public static boolean addElement(Car[][] matrix) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite a posição que deseja inserir (linha x coluna): ");
         int row = sc.nextInt();
@@ -43,52 +41,71 @@ public class Program {
             System.out.println("Indíces de matriz inválidos");
             return false;
         }
+
         String option = "sim";
-        if (matrix[row][column] != 0) {
+        if (matrix[row][column] != null) {
             System.out.print("Deseja sobrescrever o valor? (sim/nao): ");
             option = sc.next();
         }
         if (option.equals("sim")) {
-            System.out.print("Digite o valor que deseja inserir: ");
-            matrix[row][column] = sc.nextInt();
+            Car car = buildCar();
+            matrix[row][column] = car;
         }
+
         return true;
     }
 
-    public static boolean removeElement(int[][] matrix) {
+    public static Car buildCar() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Digite a placa do carro: ");
+        String licensePlate = sc.next();
+        System.out.print("Digite o modelo do carro: ");
+        String model = sc.next();
+        System.out.print("Digite a cor do carro: ");
+        String color = sc.next();
+
+        return new Car(licensePlate, model, color);
+    }
+
+    public static boolean removeElement(Car[][] matrix) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite a posição que deseja remover (linha x coluna): ");
         int row = sc.nextInt();
         int column = sc.nextInt();
+
         if (row > matrix.length || column > matrix.length) {
             System.out.println("Indíces de matriz inválidos");
             return false;
         }
 
-        matrix[row][column] = 0;
+        matrix[row][column] = null;
         return true;
     }
 
-    public static void clearMatrix(int[][] matrix) {
+    public static void clearMatrix(Car[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int y = 0; y < matrix.length; y++) {
-                matrix[i][y] = 0;
+                matrix[i][y] = null;
             }
         }
     }
 
-    public static void buildMatrix(int matrix[][]) {
+    public static void buildMatrix(Car matrix[][]) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                matrix[i][j] = 0;
+                matrix[i][j] = null;
             }
         }
     }
 
-    public static void showMatrix(int matrix[][]) {
+    public static void showMatrix(Car matrix[][]) {
         for(int i = 0; i < matrix.length; i++) {
             for (int y = 0; y < matrix.length; y++) {
-                System.out.print(" | " + matrix[i][y]);
+                if (matrix[i][y] != null) {
+                    System.out.print(" | " + matrix[i][y].toString());
+                } else {
+                    System.out.print(" | " + matrix[i][y]);
+                }
             }
             System.out.println(" |");
         }
