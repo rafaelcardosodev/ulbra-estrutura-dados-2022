@@ -1,0 +1,96 @@
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Program {
+    public static void main(String[] args) {
+        int row = 9;
+        int column = 8;
+        int matrix[][] = buildMatrix(row, column);
+        int patternMatrix[][] = buildMatrix(3, 3);
+
+        int[][] matrixTest = {
+                {0,0,1,0,0,0,0,1,0},
+                {0,1,1,1,1,1,1,0,0},
+                {0,0,1,0,1,1,1,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,0,1,0,0},
+                {0,0,0,0,0,1,0,0,0},
+                {1,1,1,0,1,0,1,0,0},
+                {1,0,1,0,0,0,0,0,0},
+                {1,1,1,0,0,1,1,1,0}
+        };
+
+        int[][] patternTest = {
+                {0,1,0},
+                {1,1,1},
+                {0,1,0}
+        };
+
+        // para usar a matriz de teste, descomente esse bloco de código
+        // printMatrix(matrixTest, row, column);
+        // System.out.println("-----------------------------");
+        // printMatrix(patternTest, patternTest.length, patternTest.length);
+        // findPattern(matrixTest, patternTest, matrixTest.length, matrixTest.length);
+
+        printMatrix(matrix, row, column);
+        System.out.println("-----------------------------");
+        printMatrix(patternMatrix, patternMatrix.length, patternMatrix.length);
+
+
+        double startTime = System.nanoTime();
+        findPattern(matrix, patternMatrix, row, column);
+        double endTime = System.nanoTime();
+
+        System.out.println("Duracao: " + ((endTime - startTime)/1000000) + " milisegundos");
+
+    }
+
+    public static int[][] buildMatrix(int rows, int columns) {
+        int[][] matrix = new int[rows][columns];
+        for(int i = 0; i < rows; i++) {
+            for (int y = 0; y < columns; y++) {
+                matrix[i][y] = (int)(Math.random() * 2);
+            }
+        }
+        return matrix;
+    }
+
+    public static void printMatrix(int[][] matrix, int rows, int columns) {
+        for(int i = 0; i < rows; i++) {
+            for (int y = 0; y < columns; y++) {
+                System.out.print(" | " + matrix[i][y]);
+            }
+            System.out.println(" |");
+        }
+    }
+
+    public static void findPattern(int[][] matrix, int[][] patternMatrix, int matrixRows, int matrixColumns) {
+        int counter = 0;
+        for (int i = 0; i < matrixColumns; i++) {
+            for (int y = 0; y < matrixRows; y++) {
+                if (matrix[y][i] == patternMatrix[0][0] && y < (matrixRows - patternMatrix.length + 1) && i < (matrixColumns - patternMatrix.length + 1)) {
+                    if (matrix[y][i+1] == patternMatrix[0][1]) {
+                        if (matrix[y][i+2] == patternMatrix[0][2]) {
+                            if (matrix[y+1][i] == patternMatrix[1][0]) {
+                                if (matrix[y+1][i+1] == patternMatrix[1][1]) {
+                                    if (matrix[y+1][i+2] == patternMatrix[1][2]) {
+                                        if (matrix[y+2][i] == patternMatrix[2][0]) {
+                                            if (matrix[y+2][i+1] == patternMatrix[2][1]) {
+                                                if (matrix[y+2][i+2] == patternMatrix[2][2]) {
+                                                    counter++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("Quantidade de repeticoes encontradas: " + counter);
+    }
+}
