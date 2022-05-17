@@ -1,7 +1,14 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 public class ArrayFactory {
 
     public static int[] generateArray(int length) {
         int array[] = new int[length];
+
+        List<Integer> integer = new ArrayList<>();
 
         for (int i = 0; i < array.length; i++) {
             array[i] = (int)(Math.random() * length);
