@@ -4,8 +4,8 @@ import java.util.TimerTask;
 
 public class Program {
     public static void main(String[] args) {
-        int row = 9;
-        int column = 8;
+        int row = 100;
+        int column = 100;
         int matrix[][] = buildMatrix(row, column);
         int patternMatrix[][] = buildMatrix(3, 3);
 
