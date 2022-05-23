@@ -6,6 +6,7 @@ public class Program {
     public static void main(String[] args) {
         int row = 100;
         int column = 100;
+
         int matrix[][] = buildMatrix(row, column);
         int patternMatrix[][] = buildMatrix(3, 3);
 

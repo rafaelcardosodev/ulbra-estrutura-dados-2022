@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ap2.iml" filepath="$PROJECT_DIR$/.idea/ap2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ordenacao/ordenacao.iml" filepath="$PROJECT_DIR$/ordenacao/ordenacao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parcial-lista-encadeada/parcial-lista-encadeada.iml" filepath="$PROJECT_DIR$/parcial-lista-encadeada/parcial-lista-encadeada.iml" />
+    </modules>
+  </component>
+</project>
