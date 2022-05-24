@@ -117,11 +117,20 @@ public class List {
             removeNode(this.start, position, 1);
         }
     }
+
+    public void removeAllFromValue(String value) {
+        removeAllNodes(this.start, value);
+        if (this.start.value.equals(value)) {
+            this.start = this.start.next;
+            length--;
+        }
+    }
     
     private void removeNode(Node e, int position, int counter) {
         if (position == counter + 1) {
             if (e.next.next == null) {
                 e.next = null;
+                length--;
                 return;
             }
             e.next = e.next.next;
@@ -136,6 +145,7 @@ public class List {
         if (list.end == e.next) {
             e.next = null;
             list.end = e;
+            length--;
         } else {
             removeNode(e.next, list);
         }
@@ -144,6 +154,7 @@ public class List {
     private void removeNode(Node e, String value) {
         if (e.next.value.equals(value)) {
             e.next = e.next.next;
+            length--;
             return;
         }
         removeNode(e.next, value);
@@ -156,19 +167,16 @@ public class List {
                 if (e.next.next == null) {
                     e.next = null;
                     this.end = e;
+                    length--;
                     return;
                 }
                 e.next = e.next.next;
+                length--;
                 removeAllNodes(e, value);
             }
-            removeAllNodes(e.next, value);
-        }
-    }
-
-    public void removeAllFromValue(String value) {
-        removeAllNodes(this.start, value);
-        if (this.start.value.equals(value)) {
-            this.start = this.start.next;
+            if (e.next != null) {
+                removeAllNodes(e.next, value);
+            }
         }
     }
 
