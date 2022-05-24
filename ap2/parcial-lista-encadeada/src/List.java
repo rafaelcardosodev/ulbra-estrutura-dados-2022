@@ -1,5 +1,4 @@
-import com.sun.istack.internal.Nullable;
-import netscape.javascript.JSUtil;
+
 
 public class List {
     int length;
@@ -57,6 +56,7 @@ public class List {
 
     private void printNodes(Node e) {
         if (e.next == null) {
+            System.out.print(e.value + " ");
             return;
         }
         printNodes(e.next);
@@ -151,19 +151,25 @@ public class List {
     }
 
     private void removeAllNodes(Node e, String value) {
-        if (e.next == this.end) {
-            e.next = null;
-            this.end = e;
-            return;
+        if (e.next != null) {
+            if (e.next.value.equals(value)) {
+                if (e.next.next == null) {
+                    e.next = null;
+                    this.end = e;
+                    return;
+                }
+                e.next = e.next.next;
+                removeAllNodes(e, value);
+            }
+            removeAllNodes(e.next, value);
         }
-        if (e.next.value.equals(value)) {
-            e.next = e.next.next;
-        }
-        removeAllNodes(e.next, value);
     }
 
     public void removeAllFromValue(String value) {
         removeAllNodes(this.start, value);
+        if (this.start.value.equals(value)) {
+            this.start = this.start.next;
+        }
     }
 
     public void search(String value) {
@@ -193,13 +199,12 @@ public class List {
     private void countNode(Node e, String value, int counter) {
         if (e.value.equals(value)) {
             counter++;
-        } else {
-            if (e.next == null) {
-                System.out.println("NUMBER OF MATCHES FOR '" + value + "': " + counter);
-                return;
-            }
-            countNode(e.next, value, counter);
         }
+        if (e.next == null) {
+            System.out.println("NUMBER OF MATCHES FOR '" + value + "': " + counter);
+            return;
+        }
+        countNode(e.next, value, counter);
     }
 
     public boolean isEmpty(Node e) {
