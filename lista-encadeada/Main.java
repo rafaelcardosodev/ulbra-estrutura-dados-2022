@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         List numbers = new List();
         Scanner sc = new Scanner(System.in);
+
         int option = 99;
         do {
             System.out.print("\nSELECT AN OPERATION: \n" +
